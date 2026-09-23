@@ -40,13 +40,13 @@ public abstract class GamepadRemap {
         }
 
         /** 0..1 for triggers. */
-        float readTrigger(MotionEvent event, int historyPos) {
+        public float readTrigger(MotionEvent event, int historyPos) {
             float value = historyPos < 0 ? event.getAxisValue(axis) : event.getHistoricalAxisValue(axis, historyPos);
             return Mathf.clamp((value - rest) / (full - rest), 0.0f, 1.0f);
         }
 
         /** -1..1 for sticks, oriented so the recorded direction is positive. */
-        float readStick(MotionEvent event, int historyPos) {
+        public float readStick(MotionEvent event, int historyPos) {
             float value = ExternalController.getCenteredAxis(event, axis, historyPos);
             return full < 0 ? -value : value;
         }
