@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ import com.winlator.core.AppUtils;
 import com.winlator.core.ArrayUtils;
 import com.winlator.simple.GameFilePicker;
 import com.winlator.simple.GameLibrary;
+import com.winlator.simple.GameScanDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,6 +56,34 @@ public class ShortcutsFragment extends BaseFileManagerFragment<Shortcut> {
 
     private void addGame() {
         clearClipboard();
+        String[] options = {getString(R.string.add_game_pick_exe), getString(R.string.add_game_scan_folder)};
+        new AlertDialog.Builder(getContext())
+            .setTitle(R.string.add_game)
+            .setItems(options, (dialog, which) -> {
+                if (which == 0) addSingleGame();
+                else scanFolderForGames();
+            })
+            .show();
+    }
+
+    private void scanFolderForGames() {
+        GameLibrary.ensureDefaultContainer(getActivity(), (container) -> {
+            if (container == null) {
+                AppUtils.showToast(getContext(), R.string.unable_to_prepare_container);
+                return;
+            }
+
+            (new GameFilePicker(getContext(), true, (folder) -> {
+                (new GameScanDialog(getActivity(), container, () -> {
+                    if (!isAdded()) return;
+                    manager = new ContainerManager(getContext());
+                    refreshContent();
+                })).scan(folder);
+            })).show();
+        });
+    }
+
+    private void addSingleGame() {
         GameLibrary.ensureDefaultContainer(getActivity(), (container) -> {
             if (container == null) {
                 AppUtils.showToast(getContext(), R.string.unable_to_prepare_container);

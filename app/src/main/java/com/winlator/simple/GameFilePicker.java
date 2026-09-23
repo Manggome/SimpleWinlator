@@ -15,12 +15,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/** Minimal file browser over the phone's shared storage that returns the chosen .exe/.bat/.lnk file. */
+/** Minimal file browser over the phone's shared storage that returns the chosen .exe/.bat/.lnk file, or a folder in folder mode. */
 public class GameFilePicker {
     private static final String PREF_LAST_DIR = "simple_last_game_dir";
     private final Context context;
     private final SharedPreferences preferences;
     private final Callback<File> callback;
+    private final boolean pickFolder;
     private final File rootDir = new File(GameLibrary.PHONE_STORAGE);
     private final ArrayList<File> entries = new ArrayList<>();
     private final ArrayList<String> labels = new ArrayList<>();
@@ -29,8 +30,13 @@ public class GameFilePicker {
     private ArrayAdapter<String> adapter;
 
     public GameFilePicker(Context context, Callback<File> callback) {
+        this(context, false, callback);
+    }
+
+    public GameFilePicker(Context context, boolean pickFolder, Callback<File> callback) {
         this.context = context;
         this.callback = callback;
+        this.pickFolder = pickFolder;
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         File lastDir = new File(preferences.getString(PREF_LAST_DIR, rootDir.getPath()));
@@ -43,11 +49,17 @@ public class GameFilePicker {
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> onEntryClicked(entries.get(position)));
 
-        dialog = new AlertDialog.Builder(context)
+        AlertDialog.Builder builder = new AlertDialog.Builder(context)
             .setTitle(R.string.phone_storage)
             .setView(listView)
-            .setNegativeButton(android.R.string.cancel, null)
-            .create();
+            .setNegativeButton(android.R.string.cancel, null);
+        if (pickFolder) {
+            builder.setPositiveButton(R.string.scan_this_folder, (d, which) -> {
+                preferences.edit().putString(PREF_LAST_DIR, currentDir.getPath()).apply();
+                callback.call(currentDir);
+            });
+        }
+        dialog = builder.create();
         refresh();
         dialog.show();
     }
@@ -90,7 +102,7 @@ public class GameFilePicker {
                     entries.add(file);
                     labels.add("📁  "+file.getName());
                 }
-                else if (GameLibrary.isGameFile(file)) {
+                else if (!pickFolder && GameLibrary.isGameFile(file)) {
                     entries.add(file);
                     labels.add("🎮  "+file.getName());
                 }

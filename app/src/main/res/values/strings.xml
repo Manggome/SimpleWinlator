@@ -358,4 +358,23 @@
     <string name="unable_to_add_game">Unable to add this game</string>
     <string name="phone_storage">Phone Storage</string>
     <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
+    <string name="add_game_pick_exe">Pick an .exe file</string>
+    <string name="add_game_scan_folder">Find games in a folder</string>
+    <string name="scan_this_folder">Scan this folder</string>
+    <string name="searching_for_games">Searching for games...</string>
+    <string name="no_games_found">No games found in this folder</string>
+    <string name="already_added">[added]</string>
+    <string name="found_games">Found %d executables</string>
+    <string name="adding_games">Adding games...</string>
+    <string name="games_added">%d games added</string>
+    <string name="check_for_updates">Check for Updates</string>
+    <string name="checking_for_updates">Checking for updates...</string>
+    <string name="unable_to_check_for_updates">Unable to check for updates</string>
+    <string name="app_is_up_to_date">You have the latest version</string>
+    <string name="update_available">Update Available</string>
+    <string name="update_available_message">Version %1$s is available (installed: %2$s). Update now?</string>
+    <string name="later">Later</string>
+    <string name="update">Update</string>
+    <string name="allow_install_unknown_apps">Allow installing apps from SimpleWinlator, then tap Update again</string>
+    <string name="unable_to_download_update">Unable to download the update</string>
 </resources>

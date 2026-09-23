@@ -26,7 +26,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.Executors;
 
 /**
@@ -110,16 +113,45 @@ public abstract class GameLibrary {
     public static void addGameAsync(Activity activity, Container container, File gameFile, Callback<Shortcut> callback) {
         final Handler handler = new Handler(Looper.getMainLooper());
         Executors.newSingleThreadExecutor().execute(() -> {
-            Shortcut shortcut = addGame(container, gameFile);
+            Shortcut shortcut = addGame(container, gameFile, null);
             handler.post(() -> callback.call(shortcut));
         });
     }
 
-    private static Shortcut addGame(Container container, File gameFile) {
+    /** Adds several games; the callback receives how many were added. */
+    public static void addGamesAsync(Container container, List<File> gameFiles, List<String> names, Callback<Integer> callback) {
+        final Handler handler = new Handler(Looper.getMainLooper());
+        Executors.newSingleThreadExecutor().execute(() -> {
+            int added = 0;
+            for (int i = 0; i < gameFiles.size(); i++) {
+                if (addGame(container, gameFiles.get(i), names != null ? names.get(i) : null) != null) added++;
+            }
+            final int count = added;
+            handler.post(() -> callback.call(count));
+        });
+    }
+
+    /** DOS paths (lower case) of every game already in the library, used to skip duplicates when scanning. */
+    public static Set<String> getAddedGamePaths(ContainerManager manager) {
+        HashSet<String> paths = new HashSet<>();
+        for (Container container : manager.getContainers()) {
+            File desktopDir = new File(container.getUserDir(), "Desktop");
+            File[] files = desktopDir.listFiles();
+            if (files == null) continue;
+            for (File file : files) {
+                if (!file.getName().endsWith(".desktop")) continue;
+                String path = new Shortcut(container, file).path;
+                if (path != null) paths.add(path.toLowerCase(Locale.ENGLISH));
+            }
+        }
+        return paths;
+    }
+
+    private static Shortcut addGame(Container container, File gameFile, String displayName) {
         String dosPath = toDOSPath(container, gameFile.getPath());
         if (dosPath == null) return null;
 
-        String name = StringUtils.clearReservedChars(FileUtils.getBasename(gameFile.getPath())).trim();
+        String name = StringUtils.clearReservedChars(displayName != null ? displayName : FileUtils.getBasename(gameFile.getPath())).trim();
         if (name.isEmpty()) name = "Game";
 
         File desktopDir = new File(container.getUserDir(), "Desktop");

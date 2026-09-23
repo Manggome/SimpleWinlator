@@ -30,6 +30,7 @@ import com.winlator.core.AppUtils;
 import com.winlator.core.Callback;
 import com.winlator.core.LocaleHelper;
 import com.winlator.core.PreloaderDialog;
+import com.winlator.simple.AppUpdater;
 import com.winlator.xenvironment.RootFSInstaller;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             onNavigationItemSelected(navigationView.getMenu().findItem(menuItemId));
             navigationView.setCheckedItem(menuItemId);
             if (!requestAppPermissions()) RootFSInstaller.installIfNeeded(this);
+            AppUpdater.autoCheck(this);
 
             int containerId = intent.getIntExtra("container_id", 0);
             String startPath = intent.getStringExtra("start_path");
@@ -208,6 +210,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_item_settings:
                 showFragment(new SettingsFragment());
                 break;
+            case R.id.menu_item_check_update:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                AppUpdater.check(this, true);
+                return false;
             case R.id.menu_item_about:
                 (new AboutDialog(this)).show();
                 break;
