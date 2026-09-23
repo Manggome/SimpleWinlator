@@ -8,7 +8,7 @@ android {
         minSdkVersion 26
         targetSdkVersion 28
         // SimpleWinlator release number; bump it for every release (tag v<versionName>)
-        def simpleVersion = 3
+        def simpleVersion = 4
         versionCode 2800 + simpleVersion
         versionName "11.2-simple" + simpleVersion
     }

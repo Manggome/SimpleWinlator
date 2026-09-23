@@ -66,6 +66,7 @@ import com.winlator.inputcontrols.ExternalController;
 import com.winlator.inputcontrols.InputControlsManager;
 import com.winlator.math.Mathf;
 import com.winlator.renderer.GLRenderer;
+import com.winlator.simple.GamepadAutoSwitcher;
 import com.winlator.widget.FrameRating;
 import com.winlator.widget.InputControlsView;
 import com.winlator.widget.MagnifierView;
@@ -135,6 +136,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private int frameRatingWindowId = -1;
     private Win32AppWorkarounds win32AppWorkarounds;
     private String screenEffectProfile;
+    private GamepadAutoSwitcher gamepadAutoSwitcher;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -327,6 +329,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
 
     @Override
     protected void onDestroy() {
+        if (gamepadAutoSwitcher != null) gamepadAutoSwitcher.stop();
         winHandler.stop();
         if (environment != null) environment.stopEnvironmentComponents();
         super.onDestroy();
@@ -605,6 +608,37 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 ControlsProfile profile = inputControlsManager.getProfile(Integer.parseInt(controlsProfile));
                 if (profile != null) showInputControls(profile);
             }
+        }
+
+        if (preferences.getBoolean(GamepadAutoSwitcher.PREF_ENABLED, true)) {
+            gamepadAutoSwitcher = new GamepadAutoSwitcher(this, new GamepadAutoSwitcher.Host() {
+                @Override
+                public ControlsProfile getProfile() {
+                    return inputControlsView.getProfile();
+                }
+
+                @Override
+                public void showProfile(ControlsProfile profile) {
+                    showInputControls(profile);
+                }
+
+                @Override
+                public void hideProfile() {
+                    hideInputControls();
+                }
+
+                @Override
+                public boolean isTouchButtonsVisible() {
+                    return inputControlsView.isShowTouchscreenControls();
+                }
+
+                @Override
+                public void setTouchButtonsVisible(boolean visible) {
+                    inputControlsView.setShowTouchscreenControls(visible);
+                    inputControlsView.invalidate();
+                }
+            });
+            gamepadAutoSwitcher.start();
         }
 
         if (MainActivity.DEBUG_MODE) rootView.addView(AppUtils.createDebugMsgTextView(this));

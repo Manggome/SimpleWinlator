@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.winlator.simple.GamepadAutoSwitcher;
 import com.winlator.box64.Box64EditPresetDialog;
 import com.winlator.box64.Box64Preset;
 import com.winlator.box64.Box64PresetManager;
@@ -141,6 +142,9 @@ public class SettingsFragment extends Fragment {
         final CheckBox cbEnableWineDebug = view.findViewById(R.id.CBEnableWineDebug);
         cbEnableWineDebug.setChecked(preferences.getBoolean("enable_wine_debug", false));
 
+        final CheckBox cbAutoGamepad = view.findViewById(R.id.CBAutoGamepad);
+        cbAutoGamepad.setChecked(preferences.getBoolean(GamepadAutoSwitcher.PREF_ENABLED, true));
+
         final ArrayList<String> wineDebugChannels = new ArrayList<>(Arrays.asList(preferences.getString("wine_debug_channels", DEFAULT_WINE_DEBUG_CHANNELS).split(",")));
         loadWineDebugChannels(view, wineDebugChannels);
 
@@ -197,6 +201,7 @@ public class SettingsFragment extends Fragment {
             editor.putFloat("cursor_scale", sbCursorSize.getValue() / 100.0f);
             editor.putInt("cursor_color", cpvCursorColor.getColor());
             editor.putBoolean("enable_wine_debug", cbEnableWineDebug.isChecked());
+            editor.putBoolean(GamepadAutoSwitcher.PREF_ENABLED, cbAutoGamepad.isChecked());
             editor.putInt("box64_logs", sBox64Logs.getSelectedItemPosition());
             editor.putBoolean("save_logs_to_file", cbSaveLogsToFile.isChecked());
             editor.putBoolean("open_android_browser_from_wine", cbOpenAndroidBrowserFromWine.isChecked());

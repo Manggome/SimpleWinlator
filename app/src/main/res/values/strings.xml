@@ -358,6 +358,10 @@
     <string name="unable_to_add_game">Unable to add this game</string>
     <string name="phone_storage">Phone Storage</string>
     <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
+    <string name="auto_gamepad_switch">Use a connected gamepad as player 1 (hide on-screen buttons)</string>
+    <string name="gamepad_connected_touch_hidden">Gamepad connected: on-screen buttons hidden</string>
+    <string name="gamepad_detected_touch_hidden">Gamepad detected: on-screen buttons hidden</string>
+    <string name="gamepad_disconnected_touch_restored">Gamepad disconnected: on-screen buttons restored</string>
     <string name="add_game_pick_exe">Pick an .exe file</string>
     <string name="add_game_scan_folder">Find games in a folder</string>
     <string name="scan_this_folder">Scan this folder</string>

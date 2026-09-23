@@ -12,6 +12,10 @@
     <string name="unable_to_add_game">게임을 추가하지 못했습니다</string>
     <string name="phone_storage">내장 저장공간</string>
     <string name="remove_game_confirm">목록에서 지울까요? (게임 파일은 그대로 남습니다)</string>
+    <string name="auto_gamepad_switch">게임패드가 연결되면 1P 로 쓰기 (화면 버튼 숨김)</string>
+    <string name="gamepad_connected_touch_hidden">게임패드 연결됨 · 화면 버튼을 숨겼어요</string>
+    <string name="gamepad_detected_touch_hidden">게임패드 감지됨 · 화면 버튼을 숨겼어요</string>
+    <string name="gamepad_disconnected_touch_restored">게임패드 연결 끊김 · 화면 버튼을 다시 켰어요</string>
     <string name="add_game_pick_exe">exe 파일 하나 고르기</string>
     <string name="add_game_scan_folder">폴더에서 게임 찾기</string>
     <string name="scan_this_folder">이 폴더에서 찾기</string>
