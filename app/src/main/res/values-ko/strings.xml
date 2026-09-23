@@ -12,6 +12,16 @@
     <string name="unable_to_add_game">게임을 추가하지 못했습니다</string>
     <string name="phone_storage">내장 저장공간</string>
     <string name="remove_game_confirm">목록에서 지울까요? (게임 파일은 그대로 남습니다)</string>
+    <string name="gamepad_button_setup">게임패드 버튼 설정</string>
+    <string name="gamepad_press_button">패드의 %1$s 버튼을 누르세요
+(%2$d / %3$d)</string>
+    <string name="gamepad_remap_hint">눌러도 반응이 없는 버튼은 건너뛰기를 누르세요</string>
+    <string name="gamepad_last_input">%1$s: %2$s (%3$d)</string>
+    <string name="skip">건너뛰기</string>
+    <string name="reset_to_default">초기화</string>
+    <string name="gamepad_remap_saved">게임패드 버튼을 저장했어요</string>
+    <string name="gamepad_remap_reset">게임패드 버튼을 기본값으로 되돌렸어요</string>
+    <string name="no_gamepad_connected">연결된 게임패드가 없습니다</string>
     <string name="auto_gamepad_switch">게임패드가 연결되면 1P 로 쓰기 (화면 버튼 숨김)</string>
     <string name="gamepad_connected_touch_hidden">게임패드 연결됨 · 화면 버튼을 숨겼어요</string>
     <string name="gamepad_detected_touch_hidden">게임패드 감지됨 · 화면 버튼을 숨겼어요</string>

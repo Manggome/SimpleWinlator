@@ -358,6 +358,16 @@
     <string name="unable_to_add_game">Unable to add this game</string>
     <string name="phone_storage">Phone Storage</string>
     <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
+    <string name="gamepad_button_setup">Gamepad Button Setup</string>
+    <string name="gamepad_press_button">Press %1$s on the gamepad
+(%2$d / %3$d)</string>
+    <string name="gamepad_remap_hint">If a button does nothing when pressed, tap Skip</string>
+    <string name="gamepad_last_input">%1$s: %2$s (%3$d)</string>
+    <string name="skip">Skip</string>
+    <string name="reset_to_default">Reset</string>
+    <string name="gamepad_remap_saved">Gamepad buttons saved</string>
+    <string name="gamepad_remap_reset">Gamepad buttons reset to default</string>
+    <string name="no_gamepad_connected">No gamepad connected</string>
     <string name="auto_gamepad_switch">Use a connected gamepad as player 1 (hide on-screen buttons)</string>
     <string name="gamepad_connected_touch_hidden">Gamepad connected: on-screen buttons hidden</string>
     <string name="gamepad_detected_touch_hidden">Gamepad detected: on-screen buttons hidden</string>

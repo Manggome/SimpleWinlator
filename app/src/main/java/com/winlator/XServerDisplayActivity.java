@@ -67,6 +67,8 @@ import com.winlator.inputcontrols.InputControlsManager;
 import com.winlator.math.Mathf;
 import com.winlator.renderer.GLRenderer;
 import com.winlator.simple.GamepadAutoSwitcher;
+import com.winlator.simple.GamepadRemap;
+import com.winlator.simple.GamepadRemapDialog;
 import com.winlator.widget.FrameRating;
 import com.winlator.widget.InputControlsView;
 import com.winlator.widget.MagnifierView;
@@ -164,6 +166,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
         navigationView.setNavigationItemSelectedListener(this);
 
         rootFS = RootFS.find(this);
+        GamepadRemap.load(this);
 
         if (!isGenerateWineprefix()) {
             ContainerManager containerManager = new ContainerManager(this);
@@ -403,6 +406,10 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
                 break;
             case R.id.menu_item_touchpad_help:
                 showTouchpadHelpDialog();
+                break;
+            case R.id.menu_item_gamepad_setup:
+                (new GamepadRemapDialog(this)).show();
+                drawerLayout.closeDrawers();
                 break;
             case R.id.menu_item_exit:
                 exit();

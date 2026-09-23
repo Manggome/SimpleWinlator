@@ -31,6 +31,8 @@ import com.winlator.core.Callback;
 import com.winlator.core.LocaleHelper;
 import com.winlator.core.PreloaderDialog;
 import com.winlator.simple.AppUpdater;
+import com.winlator.simple.GamepadRemap;
+import com.winlator.simple.GamepadRemapDialog;
 import com.winlator.xenvironment.RootFSInstaller;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -210,6 +212,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_item_settings:
                 showFragment(new SettingsFragment());
                 break;
+            case R.id.menu_item_gamepad_setup:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                GamepadRemap.load(this);
+                (new GamepadRemapDialog(this)).show();
+                return false;
             case R.id.menu_item_check_update:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 AppUpdater.check(this, true);

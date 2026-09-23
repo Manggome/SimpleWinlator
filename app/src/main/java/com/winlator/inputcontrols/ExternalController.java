@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import androidx.annotation.Nullable;
 
 import com.winlator.core.ArrayUtils;
+import com.winlator.simple.GamepadRemap;
 import com.winlator.math.Mathf;
 
 import org.json.JSONArray;
@@ -191,7 +192,7 @@ public class ExternalController implements GamepadSlot {
     public boolean updateStateFromKeyEvent(KeyEvent event) {
         boolean pressed = event.getAction() == KeyEvent.ACTION_DOWN;
         int keyCode = event.getKeyCode();
-        int buttonIdx = getButtonIdxByKeyCode(keyCode);
+        int buttonIdx = GamepadRemap.getButtonIdx(event.getDevice(), keyCode);
         if (buttonIdx != -1) {
             if (buttonIdx == IDX_BUTTON_L2 || buttonIdx == IDX_BUTTON_R2) processTriggerButtonOnMotionEvent = false;
             state.setPressed(buttonIdx, pressed);
