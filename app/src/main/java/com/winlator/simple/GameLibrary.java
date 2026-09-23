@@ -168,7 +168,9 @@ public abstract class GameLibrary {
             "Type=Application\n" +
             "StartupNotify=true\n" +
             (hasIcon ? "Icon="+iconName+"\n" : "") +
-            "StartupWMClass="+gameFile.getName().toLowerCase(Locale.ENGLISH)+"\n";
+            "StartupWMClass="+gameFile.getName().toLowerCase(Locale.ENGLISH)+"\n" +
+            // Games that open windowed get stretched to the screen; can be turned off per game
+            "\n[Extra Data]\nforceFullscreen=1\n";
 
         if (!FileUtils.writeString(desktopFile, content)) return null;
         return new Shortcut(container, desktopFile);
