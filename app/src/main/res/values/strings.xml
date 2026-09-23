@@ -351,8 +351,7 @@
     <!-- SimpleWinlator -->
     <string name="games">Games</string>
     <string name="add_game">Add Game</string>
-    <string name="no_games_hint">No games yet.
-Tap + and pick the game's .exe file.</string>
+    <string name="no_games_hint">No games yet.\nTap + and pick the game\'s .exe file.</string>
     <string name="preparing_default_container">Preparing Windows environment...</string>
     <string name="default_container_name">Default</string>
     <string name="unable_to_prepare_container">Unable to prepare the Windows environment</string>
