@@ -31,6 +31,7 @@ import com.winlator.core.Callback;
 import com.winlator.core.LocaleHelper;
 import com.winlator.core.PreloaderDialog;
 import com.winlator.simple.AppUpdater;
+import com.winlator.simple.CrashReporter;
 import com.winlator.simple.GamepadRemap;
 import com.winlator.simple.GamepadRemapDialog;
 import com.winlator.xenvironment.RootFSInstaller;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         AppUtils.setActivityTheme(this);
         super.onCreate(savedInstanceState);
+        CrashReporter.install(this);
         setContentView(R.layout.main_activity);
 
         drawerLayout = findViewById(R.id.DrawerLayout);
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(menuItemId);
             if (!requestAppPermissions()) RootFSInstaller.installIfNeeded(this);
             AppUpdater.autoCheck(this);
+            CrashReporter.showPendingReport(this);
 
             int containerId = intent.getIntExtra("container_id", 0);
             String startPath = intent.getStringExtra("start_path");

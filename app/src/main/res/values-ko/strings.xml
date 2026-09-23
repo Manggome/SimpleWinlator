@@ -12,6 +12,8 @@
     <string name="unable_to_add_game">게임을 추가하지 못했습니다</string>
     <string name="phone_storage">내장 저장공간</string>
     <string name="remove_game_confirm">목록에서 지울까요? (게임 파일은 그대로 남습니다)</string>
+    <string name="app_crashed_last_time">지난번에 앱이 튕겼어요</string>
+    <string name="crash_report_copied">오류 내용을 복사했어요. 문제를 알릴 때 붙여 넣어 주세요</string>
     <string name="gamepad_left_stick_click">왼쪽 스틱 누르기 (L3)</string>
     <string name="gamepad_right_stick_click">오른쪽 스틱 누르기 (R3)</string>
     <string name="gamepad_right_stick_right">오른쪽 스틱을 오른쪽 끝까지 미세요</string>

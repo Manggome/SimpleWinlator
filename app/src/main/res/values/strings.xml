@@ -358,6 +358,8 @@
     <string name="unable_to_add_game">Unable to add this game</string>
     <string name="phone_storage">Phone Storage</string>
     <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
+    <string name="app_crashed_last_time">The app crashed last time</string>
+    <string name="crash_report_copied">Crash report copied. Paste it when reporting the problem</string>
     <string name="gamepad_left_stick_click">Left stick press (L3)</string>
     <string name="gamepad_right_stick_click">Right stick press (R3)</string>
     <string name="gamepad_right_stick_right">Push the right stick all the way RIGHT</string>

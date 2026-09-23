@@ -66,6 +66,7 @@ import com.winlator.inputcontrols.ExternalController;
 import com.winlator.inputcontrols.InputControlsManager;
 import com.winlator.math.Mathf;
 import com.winlator.renderer.GLRenderer;
+import com.winlator.simple.CrashReporter;
 import com.winlator.simple.GamepadAutoSwitcher;
 import com.winlator.simple.GamepadRemap;
 import com.winlator.simple.GamepadRemapDialog;
@@ -144,6 +145,7 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     public void onCreate(Bundle savedInstanceState) {
         AppUtils.setActivityTheme(this);
         super.onCreate(savedInstanceState);
+        CrashReporter.install(this);
         AppUtils.hideSystemUI(this);
         AppUtils.keepScreenOn(this);
         setContentView(R.layout.xserver_display_activity);

@@ -101,6 +101,8 @@ public class Keyboard {
         int action = event.getAction();
         if (action == KeyEvent.ACTION_DOWN || action == KeyEvent.ACTION_UP) {
             int keyCode = event.getKeyCode();
+            // Pads often expose extra keyboard-class devices that send key codes beyond this table
+            if (keyCode < 0 || keyCode >= keycodeMap.length) return false;
             XKeycode xKeycode = keycodeMap[keyCode];
             if (xKeycode == null) return false;
 

@@ -136,6 +136,8 @@ public class GamepadRemapDialog {
     private boolean onKey(KeyEvent event) {
         InputDevice eventDevice = event.getDevice();
         if (!ExternalController.isGameController(eventDevice)) return false;
+        // Events can still arrive while the dialog is closing after the last step
+        if (step >= steps.length) return true;
         if (event.getAction() != KeyEvent.ACTION_DOWN || event.getRepeatCount() > 0) return true;
 
         int keyCode = event.getKeyCode();
@@ -170,6 +172,7 @@ public class GamepadRemapDialog {
         InputDevice eventDevice = event.getDevice();
         if (!ExternalController.isGameController(eventDevice) || (event.getSource() & InputDevice.SOURCE_JOYSTICK) != InputDevice.SOURCE_JOYSTICK) return false;
         if (device != null && eventDevice.getId() != device.getId()) return true;
+        if (step >= steps.length) return true;
 
         Step current = steps[step];
         int detectedAxis = -1;
@@ -246,6 +249,7 @@ public class GamepadRemapDialog {
     }
 
     private void nextStep() {
+        if (step >= steps.length) return;
         step++;
         if (step >= steps.length) finish();
         else startStep();
