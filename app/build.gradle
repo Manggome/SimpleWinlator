@@ -37,6 +37,11 @@ android {
         }
     }
 
+    // Prebuilt libs in jniLibs are also IMPORTED by CMake; both copies are identical
+    packagingOptions {
+        pickFirst 'lib/arm64-v8a/*.so'
+    }
+
     lintOptions {
         checkReleaseBuilds false
     }
