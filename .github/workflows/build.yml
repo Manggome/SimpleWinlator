@@ -45,7 +45,7 @@ jobs:
 
       - name: Rename APK
         run: |
-          VERSION=$(grep -oP 'versionName "\K[^"]+' app/build.gradle)
+          VERSION="11.2-simple$(grep -oP 'def simpleVersion = \K\d+' app/build.gradle)"
           mkdir -p out
           cp app/build/outputs/apk/debug/app-debug.apk "out/SimpleWinlator-$VERSION-arm64.apk"
 
