@@ -44,13 +44,15 @@ public class GameFilePicker {
     }
 
     public void show() {
-        adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, labels);
-        ListView listView = new ListView(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        // Use the dialog's themed context so list text contrasts with the dialog background
+        Context dialogContext = builder.getContext();
+        adapter = new ArrayAdapter<>(dialogContext, android.R.layout.simple_list_item_1, labels);
+        ListView listView = new ListView(dialogContext);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) -> onEntryClicked(entries.get(position)));
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context)
-            .setTitle(R.string.phone_storage)
+        builder.setTitle(R.string.phone_storage)
             .setView(listView)
             .setNegativeButton(android.R.string.cancel, null);
         if (pickFolder) {

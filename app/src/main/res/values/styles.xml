@@ -37,6 +37,7 @@
         <item name="panelBackground">@drawable/panel_background_light</item>
         <item name="preloaderBackground">@drawable/preloader_background_light</item>
         <item name="progressBarIndeterminateImage">@drawable/progress_bar_indeterminate_light</item>
+        <item name="alertDialogTheme">@style/AlertDialogLight</item>
     </style>
     <style name="AppThemeDark" parent="@style/AppThemeBase">
         <item name="colorAccent">#0288d1</item>
@@ -55,6 +56,19 @@
         <item name="panelBackground">@drawable/panel_background_dark</item>
         <item name="preloaderBackground">@drawable/preloader_background_dark</item>
         <item name="progressBarIndeterminateImage">@drawable/progress_bar_indeterminate_dark</item>
+        <item name="alertDialogTheme">@style/AlertDialogDark</item>
+    </style>
+    <!-- SimpleWinlator: AppCompat alert dialogs themed to match the app (AppThemeBase forces a global text color) -->
+    <style name="AlertDialogDark" parent="@style/Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">#0288d1</item>
+        <item name="android:textColorPrimary">#fafafa</item>
+        <item name="android:textColorSecondary">#9e9e9e</item>
+        <item name="android:textColorAlertDialogListItem">#fafafa</item>
+    </style>
+    <style name="AlertDialogLight" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">#0288d1</item>
+        <item name="android:textColorPrimary">#424242</item>
+        <item name="android:textColorSecondary">#757575</item>
     </style>
     <style name="AppThemeFullscreenLight" parent="@style/AppThemeLight">
         <item name="android:windowFullscreen">true</item>

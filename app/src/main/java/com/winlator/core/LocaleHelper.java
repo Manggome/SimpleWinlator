@@ -40,6 +40,9 @@ public class LocaleHelper {
     public static void setEnvVars(EnvVars envVars) {
         Locale locale = Locale.getDefault();
         for (String name : supportedLocales) {
+            // SimpleWinlator: the rootfs only ships compiled glibc locales for these; any other
+            // locale makes Wine fall back to ASCII and breaks non-ASCII (e.g. Korean) paths
+            if (!name.equals("en_US") && !name.equals("pt_BR") && !name.equals("ru_RU")) continue;
             if (locale.toString().startsWith(name.substring(0, 2))) {
                 envVars.put("LC_ALL", name+".UTF-8");
                 return;
