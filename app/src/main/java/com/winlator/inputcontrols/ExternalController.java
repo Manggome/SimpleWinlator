@@ -159,8 +159,12 @@ public class ExternalController implements GamepadSlot {
     private void processJoystickInput(MotionEvent event, int historyPos) {
         state.thumbLX = getCenteredAxis(event, MotionEvent.AXIS_X, historyPos);
         state.thumbLY = getCenteredAxis(event, MotionEvent.AXIS_Y, historyPos);
-        state.thumbRX = getCenteredAxis(event, MotionEvent.AXIS_Z, historyPos);
-        state.thumbRY = getCenteredAxis(event, MotionEvent.AXIS_RZ, historyPos);
+
+        GamepadRemap.Mapping remap = GamepadRemap.get(event.getDevice());
+        if (remap != null && remap.stickRX != null) state.thumbRX = remap.stickRX.readStick(event, historyPos);
+        else state.thumbRX = getCenteredAxis(event, remapUsesZAxes(remap) ? MotionEvent.AXIS_RX : MotionEvent.AXIS_Z, historyPos);
+        if (remap != null && remap.stickRY != null) state.thumbRY = remap.stickRY.readStick(event, historyPos);
+        else state.thumbRY = getCenteredAxis(event, remapUsesZAxes(remap) ? MotionEvent.AXIS_RY : MotionEvent.AXIS_RZ, historyPos);
 
         if (historyPos == -1) {
             float axisX = getCenteredAxis(event, MotionEvent.AXIS_HAT_X, historyPos);
@@ -173,6 +177,20 @@ public class ExternalController implements GamepadSlot {
         }
     }
 
+    /** Triggers recorded on Z/RZ mean the right stick is on RX/RY (unless recorded explicitly). */
+    private static boolean remapUsesZAxes(GamepadRemap.Mapping remap) {
+        if (remap == null) return false;
+        for (GamepadRemap.AxisSource source : new GamepadRemap.AxisSource[]{remap.triggerL, remap.triggerR}) {
+            if (source != null && (source.axis == MotionEvent.AXIS_Z || source.axis == MotionEvent.AXIS_RZ)) return true;
+        }
+        return false;
+    }
+
+    private void processRemappedTriggers(MotionEvent event, GamepadRemap.Mapping remap) {
+        if (remap.triggerL != null) state.triggerL = remap.triggerL.readTrigger(event, -1);
+        if (remap.triggerR != null) state.triggerR = remap.triggerR.readTrigger(event, -1);
+    }
+
     private void processTriggerButton(MotionEvent event) {
         state.triggerL = Mathf.clamp(Math.max(event.getAxisValue(MotionEvent.AXIS_LTRIGGER), event.getAxisValue(MotionEvent.AXIS_BRAKE)) - Mathf.EPSILON, 0.0f, 1.0f);
         state.triggerR = Mathf.clamp(Math.max(event.getAxisValue(MotionEvent.AXIS_RTRIGGER), event.getAxisValue(MotionEvent.AXIS_GAS)) - Mathf.EPSILON, 0.0f, 1.0f);
@@ -180,7 +198,9 @@ public class ExternalController implements GamepadSlot {
 
     public boolean updateStateFromMotionEvent(MotionEvent event) {
         if (isJoystickDevice(event)) {
-            if (processTriggerButtonOnMotionEvent) processTriggerButton(event);
+            GamepadRemap.Mapping remap = GamepadRemap.get(event.getDevice());
+            if (remap != null && (remap.triggerL != null || remap.triggerR != null)) processRemappedTriggers(event, remap);
+            else if (processTriggerButtonOnMotionEvent) processTriggerButton(event);
             int historySize = event.getHistorySize();
             for (int i = 0; i < historySize; i++) processJoystickInput(event, i);
             processJoystickInput(event, -1);
@@ -192,7 +212,7 @@ public class ExternalController implements GamepadSlot {
     public boolean updateStateFromKeyEvent(KeyEvent event) {
         boolean pressed = event.getAction() == KeyEvent.ACTION_DOWN;
         int keyCode = event.getKeyCode();
-        int buttonIdx = GamepadRemap.getButtonIdx(event.getDevice(), keyCode);
+        int buttonIdx = GamepadRemap.getButtonIdx(event);
         if (buttonIdx != -1) {
             if (buttonIdx == IDX_BUTTON_L2 || buttonIdx == IDX_BUTTON_R2) processTriggerButtonOnMotionEvent = false;
             state.setPressed(buttonIdx, pressed);

@@ -358,10 +358,17 @@
     <string name="unable_to_add_game">Unable to add this game</string>
     <string name="phone_storage">Phone Storage</string>
     <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
+    <string name="gamepad_left_stick_click">Left stick press (L3)</string>
+    <string name="gamepad_right_stick_click">Right stick press (R3)</string>
+    <string name="gamepad_right_stick_right">Push the right stick all the way RIGHT</string>
+    <string name="gamepad_right_stick_down">Push the right stick all the way DOWN</string>
+    <string name="gamepad_move_stick">%1$s
+(%2$d / %3$d)</string>
+    <string name="gamepad_last_axis">%1$s: %2$s = %3$.2f</string>
     <string name="gamepad_button_setup">Gamepad Button Setup</string>
     <string name="gamepad_press_button">Press %1$s on the gamepad
 (%2$d / %3$d)</string>
-    <string name="gamepad_remap_hint">If a button does nothing when pressed, tap Skip</string>
+    <string name="gamepad_remap_hint">Triggers and sticks are detected from analog axes too. If nothing happens, tap Skip</string>
     <string name="gamepad_last_input">%1$s: %2$s (%3$d)</string>
     <string name="skip">Skip</string>
     <string name="reset_to_default">Reset</string>

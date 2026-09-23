@@ -12,10 +12,17 @@
     <string name="unable_to_add_game">게임을 추가하지 못했습니다</string>
     <string name="phone_storage">내장 저장공간</string>
     <string name="remove_game_confirm">목록에서 지울까요? (게임 파일은 그대로 남습니다)</string>
+    <string name="gamepad_left_stick_click">왼쪽 스틱 누르기 (L3)</string>
+    <string name="gamepad_right_stick_click">오른쪽 스틱 누르기 (R3)</string>
+    <string name="gamepad_right_stick_right">오른쪽 스틱을 오른쪽 끝까지 미세요</string>
+    <string name="gamepad_right_stick_down">오른쪽 스틱을 아래 끝까지 미세요</string>
+    <string name="gamepad_move_stick">%1$s
+(%2$d / %3$d)</string>
+    <string name="gamepad_last_axis">%1$s: %2$s = %3$.2f</string>
     <string name="gamepad_button_setup">게임패드 버튼 설정</string>
     <string name="gamepad_press_button">패드의 %1$s 버튼을 누르세요
 (%2$d / %3$d)</string>
-    <string name="gamepad_remap_hint">눌러도 반응이 없는 버튼은 건너뛰기를 누르세요</string>
+    <string name="gamepad_remap_hint">트리거·스틱은 아날로그 축으로도 인식해요. 눌러도 반응이 없으면 건너뛰기를 누르세요</string>
     <string name="gamepad_last_input">%1$s: %2$s (%3$d)</string>
     <string name="skip">건너뛰기</string>
     <string name="reset_to_default">초기화</string>
