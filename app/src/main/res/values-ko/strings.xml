@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleWinlator</string>
+
+    <!-- SimpleWinlator -->
+    <string name="games">게임</string>
+    <string name="add_game">게임 추가</string>
+    <string name="no_games_hint">아직 게임이 없습니다.\n오른쪽 위 + 를 눌러 게임 .exe 파일을 고르세요.</string>
+    <string name="preparing_default_container">윈도우 환경을 준비하는 중...</string>
+    <string name="default_container_name">기본</string>
+    <string name="unable_to_prepare_container">윈도우 환경을 준비하지 못했습니다</string>
+    <string name="unable_to_add_game">게임을 추가하지 못했습니다</string>
+    <string name="phone_storage">내장 저장공간</string>
+    <string name="remove_game_confirm">목록에서 지울까요? (게임 파일은 그대로 남습니다)</string>
+
+    <!-- 자주 보이는 화면 -->
+    <string name="remove">삭제</string>
+    <string name="add">추가</string>
+    <string name="shortcuts">바로가기</string>
+    <string name="containers">컨테이너 (고급)</string>
+    <string name="input_controls">조작 버튼</string>
+    <string name="settings">설정</string>
+    <string name="about">정보</string>
+    <string name="copy">복사</string>
+    <string name="cut">잘라내기</string>
+    <string name="view_style">보기 방식</string>
+    <string name="name">이름</string>
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="none">없음</string>
+    <string name="loading">불러오는 중...</string>
+    <string name="creating_container">컨테이너 만드는 중...</string>
+    <string name="installing_system_files">시스템 파일 설치 중... (처음 한 번만)</string>
+    <string name="updating_system_files">시스템 파일 업데이트 중...</string>
+    <string name="starting_up">게임 시작 중...</string>
+    <string name="unable_to_install_system_files">시스템 파일을 설치하지 못했습니다</string>
+    <string name="do_you_want_to_remove_this_file">이 파일을 삭제할까요?</string>
+    <string name="the_settings_have_been_changed_do_you_want_to_restart_the_app">설정이 바뀌었습니다. 앱을 다시 시작할까요?</string>
+    <string name="keyboard">키보드</string>
+    <string name="toggle_fullscreen">전체 화면 전환</string>
+    <string name="task_manager">작업 관리자</string>
+    <string name="exit">종료</string>
+    <string name="screen_size">화면 해상도</string>
+    <string name="graphics_driver">그래픽 드라이버</string>
+    <string name="audio_driver">오디오 드라이버</string>
+    <string name="force_fullscreen">강제 전체 화면</string>
+    <string name="advanced">고급</string>
+    <string name="environment_variables">환경 변수</string>
+</resources>

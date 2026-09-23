@@ -20,12 +20,15 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.winlator.container.ContainerManager;
 import com.winlator.container.Shortcut;
 import com.winlator.contentdialog.ContentDialog;
 import com.winlator.contentdialog.CreateFolderDialog;
 import com.winlator.contentdialog.ShortcutSettingsDialog;
 import com.winlator.core.AppUtils;
 import com.winlator.core.ArrayUtils;
+import com.winlator.simple.GameFilePicker;
+import com.winlator.simple.GameLibrary;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,7 +48,30 @@ public class ShortcutsFragment extends BaseFileManagerFragment<Shortcut> {
         Shortcut selectedFolder = !folderStack.isEmpty() ? folderStack.peek() : null;
         ArrayList<Shortcut> shortcuts = manager.loadShortcuts(selectedFolder);
         recyclerView.setAdapter(new ShortcutsAdapter(shortcuts));
+        emptyTextView.setText(R.string.no_games_hint);
         emptyTextView.setVisibility(shortcuts.isEmpty() ? View.VISIBLE : View.GONE);
+    }
+
+    private void addGame() {
+        clearClipboard();
+        GameLibrary.ensureDefaultContainer(getActivity(), (container) -> {
+            if (container == null) {
+                AppUtils.showToast(getContext(), R.string.unable_to_prepare_container);
+                return;
+            }
+
+            (new GameFilePicker(getContext(), (file) -> {
+                GameLibrary.addGameAsync(getActivity(), container, file, (shortcut) -> {
+                    if (!isAdded()) return;
+                    if (shortcut == null) {
+                        AppUtils.showToast(getContext(), R.string.unable_to_add_game);
+                        return;
+                    }
+                    manager = new ContainerManager(getContext());
+                    refreshContent();
+                });
+            })).show();
+        });
     }
 
     @Override
@@ -104,8 +130,8 @@ public class ShortcutsFragment extends BaseFileManagerFragment<Shortcut> {
             refreshViewStyleMenuItem(menuItem);
             return true;
         }
-        else if (itemId == R.id.menu_item_new_folder) {
-            createFolder();
+        else if (itemId == R.id.menu_item_add) {
+            addGame();
             return true;
         }
         else return super.onOptionsItemSelected(menuItem);
@@ -113,7 +139,7 @@ public class ShortcutsFragment extends BaseFileManagerFragment<Shortcut> {
 
     @Override
     protected String getHomeTitle() {
-        return getString(R.string.shortcuts);
+        return getString(R.string.games);
     }
 
     private class ShortcutsAdapter extends RecyclerView.Adapter<ShortcutsAdapter.ViewHolder> {
@@ -200,7 +226,7 @@ public class ShortcutsFragment extends BaseFileManagerFragment<Shortcut> {
                         break;
                     case R.id.menu_item_remove:
                         clearClipboard();
-                        ContentDialog.confirm(context, R.string.do_you_want_to_remove_this_file, () -> {
+                        ContentDialog.confirm(context, shortcut.file.isDirectory() ? R.string.do_you_want_to_remove_this_file : R.string.remove_game_confirm, () -> {
                             shortcut.remove();
                             refreshContent();
                         });

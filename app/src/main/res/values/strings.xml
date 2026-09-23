@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Winlator</string>
+    <string name="app_name">SimpleWinlator</string>
     <string name="run">Run</string>
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
@@ -348,4 +348,15 @@
     <string name="ddraw_wrapper" translatable="false">DDraw Wrapper</string>
     <string name="renderer">Renderer</string>
     <string name="default_no_override">Default (No override)</string>
+    <!-- SimpleWinlator -->
+    <string name="games">Games</string>
+    <string name="add_game">Add Game</string>
+    <string name="no_games_hint">No games yet.
+Tap + and pick the game's .exe file.</string>
+    <string name="preparing_default_container">Preparing Windows environment...</string>
+    <string name="default_container_name">Default</string>
+    <string name="unable_to_prepare_container">Unable to prepare the Windows environment</string>
+    <string name="unable_to_add_game">Unable to add this game</string>
+    <string name="phone_storage">Phone Storage</string>
+    <string name="remove_game_confirm">Remove this game from the list? (The game files are kept)</string>
 </resources>

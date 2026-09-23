@@ -72,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             navigationView.setCheckedItem(R.id.menu_item_input_controls);
         }
         else {
-            boolean showShortcutsFirst = preferences.getBoolean("show_shortcuts_first", false);
+            // SimpleWinlator: the game list is always the home screen
             int selectedMenuItemId = intent.getIntExtra("selected_menu_item_id", 0);
-            int menuItemId = selectedMenuItemId > 0 ? selectedMenuItemId : (showShortcutsFirst ? R.id.menu_item_shortcuts : R.id.menu_item_containers);
+            int menuItemId = selectedMenuItemId > 0 ? selectedMenuItemId : R.id.menu_item_shortcuts;
 
             actionBar.setHomeAsUpIndicator(R.drawable.icon_action_bar_menu);
             onNavigationItemSelected(navigationView.getMenu().findItem(menuItemId));
@@ -132,12 +132,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 BaseFileManagerFragment fileManagerFragment = (BaseFileManagerFragment)currentFragment;
                 if (fileManagerFragment.onBackPressed()) return;
             }
-            else if (currentFragment instanceof ContainersFragment) {
+            if (currentFragment instanceof ShortcutsFragment) {
                 finish();
+                return;
             }
         }
 
-        showFragment(new ContainersFragment());
+        if (currentFragment instanceof ContainerDetailFragment || currentFragment instanceof ContainerFileManagerFragment) {
+            showFragment(new ContainersFragment());
+            ((NavigationView)findViewById(R.id.NavigationView)).setCheckedItem(R.id.menu_item_containers);
+            return;
+        }
+
+        showFragment(new ShortcutsFragment());
+        ((NavigationView)findViewById(R.id.NavigationView)).setCheckedItem(R.id.menu_item_shortcuts);
     }
 
     public void setOpenFileCallback(Callback<Uri> openFileCallback) {

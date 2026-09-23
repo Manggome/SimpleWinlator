@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:icon="@drawable/icon_action_bar_new_folder"
-        android:id="@+id/menu_item_new_folder"
-        android:title="@string/new_folder"
-        app:showAsAction="ifRoom" />
+        android:icon="@drawable/icon_action_bar_add"
+        android:id="@+id/menu_item_add"
+        android:title="@string/add_game"
+        app:showAsAction="always" />
 
     <item
         android:icon="@drawable/icon_action_bar_list"
